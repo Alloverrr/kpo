@@ -7,24 +7,22 @@ namespace TextTokenizer
     {
         static void Main(string[] args)
         {
-            // Читаем текст
             Text myText = TextParser.ParseFile("input.txt");
 
-            // Сортировка по количеству слов
-            Console.WriteLine("=== 1. Предложения по возрастанию количества слов ===");
-            List<Sentence> sortedByWords = TextProcessor.SortByWordCount(myText);
-            foreach (var sentence in sortedByWords)
+            Console.WriteLine("=== 3. Слова длины 4 в вопросительных предложениях ===");
+            var wordsInQuestions = TextProcessor.FindWordsInQuestions(myText, 4);
+            foreach (var word in wordsInQuestions)
             {
-                Console.WriteLine($"[{sentence.GetWordCount()} слов] {sentence}");
+                Console.WriteLine(word);
             }
             Console.WriteLine();
 
-            // Сортировка по длине предложения
-            Console.WriteLine("=== 2. Предложения по возрастанию длины ===");
-            List<Sentence> sortedByLength = TextProcessor.SortByLength(myText);
-            foreach (var sentence in sortedByLength)
+            Console.WriteLine("=== 4. Текст после удаления слов длины 3 на согласную ===");
+            // Возьмем текст из 2-х предложений для теста
+            Text filteredText = TextProcessor.RemoveWordsStartingWithConsonant(myText, 3);
+            foreach (var sentence in filteredText.Sentences)
             {
-                Console.WriteLine($"[{sentence.GetLength()} символов] {sentence}");
+                Console.WriteLine(sentence);
             }
 
             Console.ReadKey();
