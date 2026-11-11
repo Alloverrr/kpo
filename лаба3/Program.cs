@@ -6,18 +6,39 @@ namespace TextTokenizer
     {
         static void Main(string[] args)
         {
+            // Читаем текст
             Text myText = TextParser.ParseFile("input.txt");
-            
-            Console.WriteLine("=== 5. Замена слов длины 3 на '[REPLACED]' во 2-м предложении ===");
-            Text replacedText = TextProcessor.ReplaceWordsInSentence(myText, 1, 3, "[REPLACED]");
-            Console.WriteLine(replacedText.Sentences[1]); // Выводим только измененное предложение
+
+            Console.WriteLine("=== 1. Сортировка по количеству слов ===");
+            foreach (var sentence in TextProcessor.SortByWordCount(myText))
+                Console.WriteLine($"[{sentence.GetWordCount()}] {sentence}");
             Console.WriteLine();
 
-            Console.WriteLine("=== 6. Текст без стоп-слов (рус/англ) ===");
-            // В файле stopwords_ru.txt только русские слова. 
-            // Если хочешь проверить на английском, можешь создать stopwords_en.txt с: a, the, was, is, it, etc.
-            Text noStopWordsText = TextProcessor.RemoveStopWords(myText, "stopwords_ru.txt");
-            Console.WriteLine(noStopWordsText);
+            Console.WriteLine("=== 2. Сортировка по длине ===");
+            foreach (var sentence in TextProcessor.SortByLength(myText))
+                Console.WriteLine($"[{sentence.GetLength()}] {sentence}");
+            Console.WriteLine();
+
+            Console.WriteLine("=== 3. Слова длины 4 в вопросах ===");
+            foreach (var word in TextProcessor.FindWordsInQuestions(myText, 4))
+                Console.WriteLine(word);
+            Console.WriteLine();
+
+            Console.WriteLine("=== 4. Удаление слов длины 3 на согласную ===");
+            Console.WriteLine(TextProcessor.RemoveWordsStartingWithConsonant(myText, 3));
+            Console.WriteLine();
+
+            Console.WriteLine("=== 5. Замена слов длины 4 во 2-м предложении ===");
+            Console.WriteLine(TextProcessor.ReplaceWordsInSentence(myText, 1, 4, "[REPLACED]").Sentences[1]);
+            Console.WriteLine();
+
+            Console.WriteLine("=== 6. Удаление стоп-слов ===");
+            Console.WriteLine(TextProcessor.RemoveStopWords(myText, "stopwords_ru.txt"));
+            Console.WriteLine();
+
+            Console.WriteLine("=== 7. Экспорт в XML ===");
+            TextProcessor.ExportToXml(myText, "output.xml");
+            Console.WriteLine("Экспорт завершен!");
 
             Console.ReadKey();
         }

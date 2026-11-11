@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace TextTokenizer
 {
-    // Базовый класс для всех токенов
+    // Говорим сериализатору, какие классы могут быть внутри Token
+    [XmlInclude(typeof(Word))]
+    [XmlInclude(typeof(Punctuation))]
     public abstract class Token
     {
+        [XmlText] // Значение выводится прямо внутрь тега (например, <word>Привет</word>)
         public string Value { get; set; }
+
+        public Token() { }
 
         public Token(string value)
         {
@@ -18,17 +24,15 @@ namespace TextTokenizer
         }
     }
 
-    // Класс для слов
     public class Word : Token
     {
+        public Word() : base() { }
         public Word(string value) : base(value) { }
-
-        // Сюда мы потом добавим логику проверки на согласные буквы
     }
 
-    // Класс для знаков препинания
     public class Punctuation : Token
     {
+        public Punctuation() : base() { }
         public Punctuation(string value) : base(value) { }
     }
 }
