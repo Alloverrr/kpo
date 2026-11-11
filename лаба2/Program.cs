@@ -6,15 +6,24 @@ namespace лаба2
     {
         static void Main(string[] args)
         {
-            // Настраиваем пути к файлам (для теста 1)
-            Game.InputFile = "1.ChaseData.txt";
-            Game.OutputFile = "1.PursuitLog.txt";
+            var tests = new (string input, string output, int size)[]
+            {
+                ("1.ChaseData.txt", "1.PursuitLog.txt", 16),
+                ("2.ChaseData.txt", "2.PursuitLog.txt", 20),
+                ("3.ChaseData.txt", "3.PursuitLog.txt", 27)
+            };
 
-            // Создаем игру с размером поля 16 и запускаем
-            Game game = new Game(16);
-            game.Run();
+            foreach (var test in tests)
+            {
+                Game.InputFile = test.input;
+                Game.OutputFile = test.output;
 
-            Console.WriteLine("Готово! Проверь файл " + Game.OutputFile);
+                Game game = new Game(test.size);
+                game.Run();
+                Console.WriteLine($"Готово: {test.output}");
+            }
+
+            Console.WriteLine("Все тесты завершены. Нажмите любую клавишу...");
             Console.ReadKey();
         }
     }
