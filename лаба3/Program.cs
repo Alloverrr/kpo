@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TextTokenizer
 {
@@ -8,22 +7,17 @@ namespace TextTokenizer
         static void Main(string[] args)
         {
             Text myText = TextParser.ParseFile("input.txt");
-
-            Console.WriteLine("=== 3. Слова длины 4 в вопросительных предложениях ===");
-            var wordsInQuestions = TextProcessor.FindWordsInQuestions(myText, 4);
-            foreach (var word in wordsInQuestions)
-            {
-                Console.WriteLine(word);
-            }
+            
+            Console.WriteLine("=== 5. Замена слов длины 3 на '[REPLACED]' во 2-м предложении ===");
+            Text replacedText = TextProcessor.ReplaceWordsInSentence(myText, 1, 3, "[REPLACED]");
+            Console.WriteLine(replacedText.Sentences[1]); // Выводим только измененное предложение
             Console.WriteLine();
 
-            Console.WriteLine("=== 4. Текст после удаления слов длины 3 на согласную ===");
-            // Возьмем текст из 2-х предложений для теста
-            Text filteredText = TextProcessor.RemoveWordsStartingWithConsonant(myText, 3);
-            foreach (var sentence in filteredText.Sentences)
-            {
-                Console.WriteLine(sentence);
-            }
+            Console.WriteLine("=== 6. Текст без стоп-слов (рус/англ) ===");
+            // В файле stopwords_ru.txt только русские слова. 
+            // Если хочешь проверить на английском, можешь создать stopwords_en.txt с: a, the, was, is, it, etc.
+            Text noStopWordsText = TextProcessor.RemoveStopWords(myText, "stopwords_ru.txt");
+            Console.WriteLine(noStopWordsText);
 
             Console.ReadKey();
         }

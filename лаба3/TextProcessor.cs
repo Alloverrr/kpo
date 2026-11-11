@@ -86,6 +86,97 @@ namespace TextTokenizer
 
             return newText;
         }
+
+        //Заменить слова заданной длины на подстроку в конкретном предложении
+        public static Text ReplaceWordsInSentence(Text text, int sentenceIndex, int wordLength, string replacement)
+        {
+            // Создаем копию текста, чтобы не ломать оригинал
+            Text newText = new Text();
+
+            for (int i = 0; i < text.Sentences.Count; i++)
+            {
+                Sentence oldSentence = text.Sentences[i];
+                Sentence newSentence = new Sentence();
+
+                foreach (var token in oldSentence.Tokens)
+                {
+                    // Если это нужное предложение, и токен — слово нужной длины
+                    if (i == sentenceIndex && token is Word word && word.Value.Length == wordLength)
+                    {
+                        // Заменяем слово на указанную подстроку
+                        newSentence.AddToken(new Word(replacement));
+                    }
+                    else
+                    {
+                        // Оставляем как было
+                        newSentence.AddToken(token);
+                    }
+                }
+                newText.AddSentence(newSentence);
+            }
+
+            return newText;
+        }
+        // Задание 6. Удалить стоп-слова из текста
+        public static Text RemoveStopWords(Text text, string stopWordsFilePath)
+        {
+            // 1. Загружаем стоп-слова в HashSet для быстрого поиска (O(1))
+            HashSet<string> stopWords = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            if (System.IO.File.Exists(stopWordsFilePath))
+            {
+                string[] lines = System.IO.File.ReadAllLines(stopWordsFilePath);
+                foreach (var line in lines)
+                {
+                    string word = line.Trim();
+                    if (!string.IsNullOrEmpty(word))
+                    {
+                        stopWords.Add(word);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Внимание: файл {stopWordsFilePath} не найден!");
+            }
+
+            //Формируем новый текст без стоп-слов
+            Text newText = new Text();
+
+            foreach (var sentence in text.Sentences)
+            {
+                Sentence newSentence = new Sentence();
+
+                foreach (var token in sentence.Tokens)
+                {
+                    bool isStopWord = false;
+
+                    if (token is Word word)
+                    {
+                        // Приводим к нижнему регистру для сравнения
+                        if (stopWords.Contains(word.Value.ToLower()))
+                        {
+                            isStopWord = true;
+                        }
+                    }
+
+                    // Если это не стоп-слово, добавляем
+                    if (!isStopWord)
+                    {
+                        newSentence.AddToken(token);
+                    }
+                }
+
+                // Если в предложении остались слова, добавляем его
+                if (newSentence.Tokens.Count > 0)
+                {
+                    newText.AddSentence(newSentence);
+                }
+            }
+
+            return newText;
+        }
     }
+
 
 }
