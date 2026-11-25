@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="FitnessClubApp.Models.Admin">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessClubApp.Models.Booking">
+    <Position X="7.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEQAAAEQAAAAAAAAAAQAAAAAAAEAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ClubEntities.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+      <Property Name="Membership" />
+      <Property Name="Session" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FitnessClubApp.Models.Client">
+    <Position X="5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAgAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessClubApp.Models.Membership">
+    <Position X="6.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EQACAAAEAAAAAEAAEAAAAAAiAAAAAAAAAAAAAEAAAAY=</HashCode>
+      <FileName>Models\ClubEntities.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FitnessClubApp.Models.Order">
+    <Position X="6.5" Y="8.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAAACAAAAAAAAAAAQAAAAAAgAAAIAQ=</HashCode>
+      <FileName>Models\ClubEntities.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FitnessClubApp.Models.Product">
+    <Position X="10.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAIIAAAAAIQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\ClubEntities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessClubApp.Models.Trainer">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessClubApp.Models.TrainingSession">
+    <Position X="3.5" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAEAAACAAAAAAoACQAEAAAAAAAAAAiAA=</HashCode>
+      <FileName>Models\ClubEntities.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Trainer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FitnessClubApp.Models.User">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAAEAAAAAAAAAAAAAACAAAQIIAAAAA=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FitnessClubApp.Services.FitnessClubManager">
+    <Position X="10.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAEAACAAAIAgAAAAQiCAABAJAAAAAAAAEAAQABAAAAA=</HashCode>
+      <FileName>Services\Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
