@@ -38,7 +38,6 @@ namespace лаба2
             // Читаем все строки из входного файла
             string[] lines = File.ReadAllLines(InputFile);
 
-            // Начинаем с 1, так как 0-я строка это размер поля
             for (int i = 1; i < lines.Length; i++)
             {
                 if (isGameOver) break; // Если игра кончилась, останавливаемся
@@ -80,15 +79,14 @@ namespace лаба2
                 PrintFinalResult(false);
             }
 
-            writer.Close(); // Закрываем файл
+            writer.Close();
         }
         private void PrintState()
         {
             // Если игрок не в игре, выводим "??", иначе его координату
             string catPos = (cat.state == State.NotInGame) ? "??" : cat.location.ToString();
             string mousePos = (mouse.state == State.NotInGame) ? "??" : mouse.location.ToString();
-
-            // PadLeft делает ровные столбцы (добавляет пробелы слева)
+            
             writer.WriteLine($"{catPos.PadLeft(3)} {mousePos.PadLeft(5)} {GetDistance().ToString().PadLeft(9)}");
         }
 
